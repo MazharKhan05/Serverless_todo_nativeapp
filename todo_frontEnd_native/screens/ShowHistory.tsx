@@ -82,7 +82,7 @@ const ShowHistory = ({ navigation, route }) => {
         const res = todoApiObj.getTodoHistory(token, todoIdStr!);
         res
           .then((histTodos) => {
-            if (histTodos.errType != "" && histTodos.statusCode != 200) {
+            if (histTodos.statusCode != 200) {
               setHistoryAlertMsg(histTodos.message);
               setShowAlert(true);
             }

@@ -1,4 +1,4 @@
-import { useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, TextInput } from "react-native";
 import tw from "tailwind-react-native-classnames";
@@ -49,16 +49,16 @@ const AddTodo: React.FC<Props> = (
     if (isChanged) setIsChanged(false);
     setShow(show ? false : show);
     let body: PostTodo = {
-      name: "",
+      Name: "",
     };
     const todoApiObj = new TodoApi();
-    body.name = todoName;
-    if (body.name != "" && token !== "") {
+    body.Name = todoName;
+    if (body.Name != "" && token !== "") {
       const res = todoApiObj.addTodo(body, token);
       res
         .then((addRes) => {
           console.log(addRes, "res from addTodo endpoint...");
-          if (addRes.errType != "" && addRes.statusCode != 200) {
+          if (addRes.statusCode != 200) {
             setAlertMsg(addRes.message);
             setShow(true);
           }

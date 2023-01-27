@@ -82,24 +82,25 @@ const Updatetodo: React.FC<Props> = (
   const handleUpdation = () => {
     if (isChanged) setIsChanged(false);
     let body: UpdateTodo = {
-      name: "",
-      status: "",
+      Name: "",
+      State: "",
     };
     const todoIdStr: string = todo.SK?.substring(7, 33)!;
     const todoApiObj = new TodoApi();
-    body.name = todoName;
-    body.status = todoStatus;
+    body.Name = todoName;
+    body.State = todoStatus;
     if (
-      (token !== "" && body.name != "") ||
-      (body.status != "" && todoIdStr && todoIdStr != "")
+      (token !== "" && body.Name != "") ||
+      (body.State != "" && todoIdStr && todoIdStr != "")
     ) {
       const res = todoApiObj.updateTodo(token, todoIdStr, body);
       res
         .then((uptRes) => {
-          if (uptRes.errType != "" && uptRes.statusCode != 200) {
+          if (uptRes.statusCode != 200) {
             setAlertMsg(uptRes.message);
             setShow(true);
           }
+          console.log("uptRes from db...", uptRes);
           setIsChanged(true);
           setAlertMsg(uptRes.message);
           setShow(true);

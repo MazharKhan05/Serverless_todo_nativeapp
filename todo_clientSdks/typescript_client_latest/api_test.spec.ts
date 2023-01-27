@@ -22,19 +22,21 @@ describe("TodoApi", () => {
   });
 
   test("addTodo", () => {
-    const body: api.PostTodo = undefined
+    const body: api.PostTodo = {
+      name: ""
+    }
     const authToken: string = "authToken_example"
     return expect(instance.addTodo(body, authToken, {})).resolves.toBe(null)
   })
   test("deleteTodo", () => {
     const authToken: string = "authToken_example"
-    const todo: string = "todo_example"
-    return expect(instance.deleteTodo(authToken, todo, {})).resolves.toBe(null)
+    const todoId: string = "todoId_example"
+    return expect(instance.deleteTodo(authToken, todoId, {})).resolves.toBe(null)
   })
   test("getTodoHistory", () => {
     const authToken: string = "authToken_example"
-    const todo: string = "todo_example"
-    return expect(instance.getTodoHistory(authToken, todo, {})).resolves.toBe(null)
+    const todoId: string = "todoId_example"
+    return expect(instance.getTodoHistory(authToken, todoId, {})).resolves.toBe(null)
   })
   test("getTodos", () => {
     const authToken: string = "authToken_example"
@@ -42,9 +44,12 @@ describe("TodoApi", () => {
   })
   test("updateTodo", () => {
     const authToken: string = "authToken_example"
-    const todo: string = "todo_example"
-    const body: api.UpdateTodo = undefined
-    return expect(instance.updateTodo(authToken, todo, body, {})).resolves.toBe(null)
+    const todoId: string = "todoId_example"
+    const body: api.UpdateTodo = {
+      name:"",
+      status: ""
+    }
+    return expect(instance.updateTodo(authToken, todoId, body, {})).resolves.toBe(null)
   })
 })
 

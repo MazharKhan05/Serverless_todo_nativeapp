@@ -67,6 +67,8 @@ const Login = ({ navigation, route }) => {
           "keychain result...",
           await SecureStore.getItemAsync("authToken")
         );
+        console.log("login response from idp...", res);
+        navigation.navigate("Home");
         // Alert.alert("Login successful", "redirecting to home page...", [
         //   { text: "OK", onPress: () => navigation.navigate("Home") },
         // ]);
@@ -92,22 +94,23 @@ const Login = ({ navigation, route }) => {
         }
       },
     });
-    if (loginSuccess) {
-      await SecureStore.setItemAsync("authToken", id_token);
-    }
+    // if (loginSuccess) {
+    //   await SecureStore.setItemAsync("authToken", id_token);
+    //   navigation.navigate("Home");
+    // }
   };
-  const handleLogin = () => {
-    loginUser()
-      .then((res) => {
-        console.log("login done, now redirecting", res);
-        setTimeout(() => {
-          navigation.navigate("Home");
-        }, 3000);
-      })
-      .catch((err) => {
-        console.log("error while logging in...", err);
-      });
-  };
+  // const handleLogin = () => {
+  //   loginUser()
+  //     .then((res) => {
+  //       console.log("login done, now redirecting", res);
+  //       setTimeout(() => {
+  //         navigation.navigate("Home");
+  //       }, 3000);
+  //     })
+  //     .catch((err) => {
+  //       console.log("error while logging in...", err);
+  //     });
+  // };
   return (
     <SafeAreaView
       style={{
@@ -144,7 +147,7 @@ const Login = ({ navigation, route }) => {
             />
             <TouchableOpacity
               style={tw`flex items-center flex-row justify-center h-8 rounded-md border border-transparent py-1 px-2 font-bold text-white bg-blue-400 text-center`}
-              onPress={() => handleLogin()}
+              onPress={() => loginUser()}
             >
               <Text style={[tw`text-center text-md`, { color: "white" }]}>
                 Login

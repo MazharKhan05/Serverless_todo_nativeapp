@@ -1,6 +1,4 @@
-import { rejects } from "assert";
 import * as SecureStore from "expo-secure-store";
-import { resolve } from "path";
 import { cognitoPool } from "../utils/cognito-pool";
 
 
@@ -10,7 +8,10 @@ import { cognitoPool } from "../utils/cognito-pool";
         authToken: ''
     }
     const loggedInUserToken = await SecureStore.getItemAsync("authToken");  //await SecureStore.getItemAsync("authToken")
+      console.log("stored userToken in sercureStr...", loggedInUserToken);
       const user = cognitoPool.getCurrentUser();
+      console.log("cognito user currently loggedIN...", user);
+
       if(user){
         let isSessionValid = false
         let userId_token;
@@ -22,7 +23,7 @@ import { cognitoPool } from "../utils/cognito-pool";
             userId_token = session?.getIdToken().getJwtToken()
             if(userId_token && userId_token !== "")isSessionValid = true
         })
-        console.log('cognitoSessionUserToken', userId_token)
+        console.log('cognitoSessionUserToken...', userId_token)
         if(loggedInUserToken === String(userId_token)){
             userSession.authToken = userId_token;
             userSession.isLoggedIn = true

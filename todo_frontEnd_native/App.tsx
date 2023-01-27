@@ -24,7 +24,13 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={Todos} />
-        <Stack.Screen name="login" component={Login} />
+        <Stack.Screen
+          name="login"
+          component={Login}
+          options={({ route, navigation }) => ({
+            title: "Login",
+          })}
+        />
 
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="TodoHistory" component={showHistory} />
